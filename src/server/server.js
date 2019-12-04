@@ -1,15 +1,12 @@
-import nextJS from 'next'
-import express from 'express'
-import compression from 'compression';
-import morgan from 'morgan'
-import routes from './routes'
+const nextJS = require('next')
+const express = require('express')
+const compression = require('compression')
+const morgan = require('morgan')
+const routes = require('./routes').routes
 
 const dev = process.env.NODE_ENV !== 'production'
 
-const app = nextJS({
-	dir: './src',
-	dev
-})
+const app = nextJS({ dir: './src', dev })
 const handle = app.getRequestHandler()
 
 app.prepare().then(async () => {

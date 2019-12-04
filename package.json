@@ -21,11 +21,11 @@
     "react-dom": "^16.11.0"
   },
   "scripts": {
-    "dev": "NODE_ENV=development node server/index.js",
+    "dev": "NODE_ENV=development node src/server/server.js",
     "next": "next",
     "build": "next build",
     "export": "next build && next export",
-    "start": "NODE_ENV=production node server/index.js",
+    "start": "NODE_ENV=production node src/server/server.js",
     "lint": "eslint src config localization",
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
