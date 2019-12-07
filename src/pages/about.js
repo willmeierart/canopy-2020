@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
 import ABOUT_QUERY from 'lib/queries/about.query';
 import { useQuery } from '@apollo/react-hooks'
 import Link from 'next/link'
+import Grid from 'components/Grid'
 
 const calcColumns = width => {
 	switch (true) {
@@ -24,7 +24,7 @@ const configureLayout = (width, height) => {
 	return { columns, squareSize, total }
 }
 
-const renderGrid = (layout, data) => Array.from('a'.repeat(layout.total)).reduce((formatted, block, idx) => {
+const AboutModule = ({ idx, layout, data }) => {
 	const bgColor = () => {
 		switch (true) {
 			case idx < layout.columns:
@@ -37,10 +37,9 @@ const renderGrid = (layout, data) => Array.from('a'.repeat(layout.total)).reduce
 				return '#dfdfdd'
 		}
 	}
-
 	const background = bgColor()
 
-	const Block = () => (
+	const Default = () => (
 		<div className="block">
 			{data[idx]?.text || ''}
 			<style jsx>{`
@@ -57,53 +56,18 @@ const renderGrid = (layout, data) => Array.from('a'.repeat(layout.total)).reduce
 		</div>
 	)
 
-	const element = idx === layout.total - 1
+	return idx === layout.total - 1
 		? <Link href="/terms"><a>terms and conditions</a></Link>
 		: !!(data[idx]?.link)
-			? <a href={data[idx].link} target="_blank"><Block /></a>
-			: <Block />
-
-	formatted.push(<div key={`block-${idx}`}>{element}</div>)
-	return formatted
-
-}, [])
+			? <a href={data[idx].link} target="_blank"><Default /></a>
+			: <Default />
+}
 
 const About = () => {
 	const { data, loading, error } = useQuery(ABOUT_QUERY);
-
-	const [windowWidth, setWindowWidth] = useState(0)
-	const [windowHeight, setWindowHeight] = useState(0)
-	const [layout, setLayout] = useState({ total: 0, width: 0, height: 0 })
-
-	useEffect(() => {
-		const handleResize = () => {
-			setWindowWidth(window?.innerWidth)
-			setWindowHeight(window?.innerHeight)
-		}
-		handleResize()
-		window.addEventListener('resize', handleResize)
-		return () => window.removeEventListener('resize', handleResize)
-	})
-
-	useEffect(() => {
-		const newLayout = configureLayout(windowWidth, windowHeight) // needs debouncing
-		setLayout(newLayout)
-	}, [windowWidth, windowHeight])
-
 	return (
 		<div className="container">
-			{data?.aboutModules && renderGrid(layout, data?.aboutModules)}
-			<style jsx>{`
-				.container {
-					box-sizing: border-box;
-					display: grid;
-					grid-row-gap: 1rem;
-					grid-column-gap: 1rem;
-					grid-template-columns: repeat(${layout.columns}, 1fr);
-					padding: 0 1rem 1rem 1rem;
-					width: 100vw;
-				}
-			`}</style>
+			{data && <Grid data={data.aboutModules} configureLayout={configureLayout} BlockElement={AboutModule} />}
 		</div>
 	)
 }
