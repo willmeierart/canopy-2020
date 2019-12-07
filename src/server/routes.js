@@ -14,6 +14,11 @@ const routes = {
 		page: 'portfolio',
 		title: 'Film & Animation'
 	},
+	PRIVACY: {
+		path: '/privacy',
+		page: 'privacy',
+		title: 'Terms & Conditions'
+	},
 }
 
 exports.routes = routes

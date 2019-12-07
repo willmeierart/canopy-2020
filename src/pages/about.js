@@ -2,6 +2,7 @@ import ABOUT_QUERY from 'lib/queries/about.query';
 import { useQuery } from '@apollo/react-hooks'
 import Link from 'next/link'
 import Grid from 'components/Grid'
+import { routes } from 'server/routes'
 
 const calcColumns = width => {
 	switch (true) {
@@ -57,7 +58,7 @@ const AboutModule = ({ idx, layout, data }) => {
 	)
 
 	return idx === layout.total - 1
-		? <Link href="/terms"><a>terms and conditions</a></Link>
+		? <Link href={routes.PRIVACY}><a>terms and conditions</a></Link>
 		: !!(data[idx]?.link)
 			? <a href={data[idx].link} target="_blank"><Default /></a>
 			: <Default />
