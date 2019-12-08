@@ -1,8 +1,8 @@
-import ABOUT_QUERY from 'lib/queries/about.query';
-import { useQuery } from '@apollo/react-hooks'
 import Link from 'next/link'
-import Grid from 'components/Grid'
+import { useQuery } from '@apollo/react-hooks'
+import ABOUT_QUERY from 'lib/queries/about.query';
 import { routes } from 'server/routes'
+import Grid from 'components/Grid'
 
 const calcColumns = width => {
 	switch (true) {
@@ -58,7 +58,7 @@ const AboutModule = ({ idx, layout, data }) => {
 	)
 
 	return idx === layout.total - 1
-		? <Link href={routes.PRIVACY}><a>terms and conditions</a></Link>
+		? <Link href={routes.PRIVACY.path}><a>terms and conditions</a></Link>
 		: !!(data[idx]?.link)
 			? <a href={data[idx].link} target="_blank"><Default /></a>
 			: <Default />
@@ -68,7 +68,7 @@ const About = () => {
 	const { data, loading, error } = useQuery(ABOUT_QUERY);
 	return (
 		<div className="container">
-			{data && <Grid data={data.aboutModules} configureLayout={configureLayout} BlockElement={AboutModule} />}
+			{data && <Grid BlockElement={AboutModule} configureLayout={configureLayout} data={data.aboutModules} />}
 		</div>
 	)
 }
