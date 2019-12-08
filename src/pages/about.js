@@ -53,12 +53,16 @@ const AboutModule = ({ idx, layout, data }) => {
 					max-width: ${layout.squareSize}px;
 					padding: 1rem;
 				}
+				.block:hover {
+					filter: brightness(90%);
+					transition: filter .5s;
+				}
 			`}</style>
 		</div>
 	)
 
 	return idx === layout.total - 1
-		? <Link href={routes.PRIVACY.path}><a>terms and conditions</a></Link>
+		? <a target="_blank" href={routes.PRIVACY.path}>terms and conditions</a>
 		: !!(data[idx]?.link)
 			? <a href={data[idx].link} target="_blank"><Default /></a>
 			: <Default />

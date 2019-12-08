@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { routes } from 'server/routes'
 
 const Header = () => {
-	const { ABOUT, HOME } = routes
+	const { ABOUT, HOME, PORTFOLIO } = routes
 
 	return (
 		<header>
@@ -10,7 +10,7 @@ const Header = () => {
 				<img src="/static/images/logo.png" />
 			</Link>
 			<div>
-				{[/*PORTFOLIO,*/ ABOUT].map((route, i) => <Link key={`link-${i}`} href={route.path}><span>{route.title}</span></Link>)}
+				{[PORTFOLIO, ABOUT].map((route, i) => <Link key={`link-${i}`} href={route.path}><span>{route.title}</span></Link>)}
 			</div>
 			<style jsx>{`
 				header {
@@ -25,15 +25,17 @@ const Header = () => {
 				}
 				img:hover {
 					filter: brightness(400%);
+					transition: filter .5s;
 				}
 				span {
 					cursor: pointer;
 					margin-left: 1rem;
+					padding: 1px;
 				}
 				span:hover {
 					background-color: var(--color-background-hover);
 					color: var(--color-text-hover);
-					padding: 1px;
+					transition: background-color .5s, color .5s;
 				}
 			`}</style>
 		</header>

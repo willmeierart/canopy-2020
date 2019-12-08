@@ -10,7 +10,7 @@ const routes = {
 		title: 'Home'
 	},
 	PORTFOLIO: {
-		path: '/portfolio',
+		path: '/portfolio/film-animation',
 		page: 'portfolio',
 		title: 'Film & Animation'
 	},
