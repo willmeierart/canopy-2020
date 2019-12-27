@@ -1,9 +1,20 @@
 import gql from 'graphql-tag'
 
-const PORTFOLIO_QUERY = type => type
+const PORTFOLIO_QUERY = ({ first, skip, type }) => type
 	? gql`
 		query Portfolio {
-			portfolioModules(where: {type: ${type}}}) {
+			portfolioModulesConnection {
+				aggregate {
+					count
+				}
+			}
+			portfolioModules(
+				first: ${first}
+				orderBy: createdAt_DESC
+				skip: ${skip}
+				where: {type: ${type}}
+			) {
+				slug
 				text
 				thumbnail
 				url
@@ -12,9 +23,21 @@ const PORTFOLIO_QUERY = type => type
 	`
 	: gql`
 		query Portfolio {
-			portfolioModules {
+			portfolioModulesConnection {
+				aggregate {
+					count
+				}
+			}
+			portfolioModules(
+				first: ${first}
+				orderBy: createdAt_DESC
+				skip: ${skip}
+			) {
+				slug
 				text
-				thumbnail
+				thumbnail {
+					url
+				}
 				type
 				url
 			}
