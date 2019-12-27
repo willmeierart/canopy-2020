@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-const renderGrid = (layout, data, BlockElement) =>
+const renderGrid = (layout, data, BlockElement, onBlockClick) =>
 	Array.from('a'.repeat(layout.total))
-		.map((block, idx) => <BlockElement key={`block-${idx}`} idx={idx} layout={layout} data={data} />)
+		.map((block, idx) => <BlockElement key={`block-${idx}`} idx={idx} layout={layout} data={data} onClick={onBlockClick} />)
 
-const Grid = ({ data, configureLayout, BlockElement }) => {
+const Grid = ({ BlockElement, configureLayout, data, layoutChangeCallback, onBlockClick = () => {} }) => {
 	const [windowWidth, setWindowWidth] = useState(0)
 	const [windowHeight, setWindowHeight] = useState(0)
 	const [layout, setLayout] = useState({ total: 0, width: 0, height: 0 })
@@ -20,21 +20,22 @@ const Grid = ({ data, configureLayout, BlockElement }) => {
 	})
 
 	useEffect(() => {
-		const newLayout = configureLayout(windowWidth, windowHeight) // needs debouncing
+		const newLayout = configureLayout(windowWidth, windowHeight, layoutChangeCallback) // needs debouncing
 		setLayout(newLayout)
 	}, [windowWidth, windowHeight])
 
 	return (
 		<div className="container">
-			{renderGrid(layout, data, BlockElement)}
+			{renderGrid(layout, data, BlockElement, onBlockClick)}
 			<style jsx>{`
 				.container {
 					box-sizing: border-box;
 					display: grid;
-					grid-row-gap: 1rem;
-					grid-column-gap: 1rem;
+					grid-row-gap: 10px;
+					grid-column-gap: 10px;
 					grid-template-columns: repeat(${layout.columns}, 1fr);
-					padding: 0 1rem 1rem 1rem;
+					padding: 10px;
+					padding-top: 0;
 					width: 100vw;
 				}
 			`}</style>
