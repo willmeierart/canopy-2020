@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { routes } from 'server/routes'
+import { routes } from 'lib/routes'
 
 const Header = () => {
 	const { ABOUT, HOME, PORTFOLIO } = routes

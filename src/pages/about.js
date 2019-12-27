@@ -1,20 +1,20 @@
 import { useQuery } from '@apollo/react-hooks'
 import ABOUT_QUERY from 'lib/queries/about.query';
 import { configureLayoutA } from 'lib/helpers'
-import { routes } from 'server/routes'
+import { routes } from 'lib/routes'
 import Grid from 'components/Grid'
 
 const AboutModule = ({ idx, layout, data }) => {
 	const bgColor = () => {
 		switch (true) {
 			case idx < layout.columns:
-				return '#696964'
+				return 'var(--color-grey-dark)'
 			case idx < layout.columns * 2:
-				return '#a5a5a2'
+				return 'var(--color-grey)'
 			case idx < layout.columns * 3:
-				return '#c9c9c7'
+				return 'var(--color-grey-light)'
 			default:
-				return '#dfdfdd'
+				return 'var(--color-grey-lighter)'
 		}
 	}
 	const background = bgColor()
@@ -26,7 +26,7 @@ const AboutModule = ({ idx, layout, data }) => {
 				.block {
 					background: ${background};
 					box-sizing: border-box;
-					color: ${background === '#dfdfdd' ? '#696964' : '#fff'};
+					color: ${background === 'var(color-grey-lighter)' ? 'var(color-grey-dark)' : '#fff'};
 					cursor: ${data[idx]?.link ? 'pointer' : 'default'};
 					height: ${layout.squareSize}px;
 					line-height: .9rem;

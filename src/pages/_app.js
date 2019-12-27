@@ -39,10 +39,16 @@ class Application extends App {
 							font-style: normal;
 						}
 						body {
-							--color-background: #f2f2f2;
-							--color-text: #676767;
+							--color-grey-darkest: #676767;
+							--color-grey-dark: #696964;
+							--color-grey: #a5a5a2;
+							--color-grey-light: #c9c9c7;
+							--color-grey-lighter: #dfdfdd;
+							--color-grey-lightest: #f2f2f2;
+							--color-background: var(--color-grey-lightest);
+							--color-text: var(--color-grey-darkest);
 							--color-text-hover: #ffffff;
-							--color-background-hover: var(--color-text);
+							--color-background-hover: var(--color-grey-darkest);
 							background: var(--color-background);
 							box-sizing: border-box;
 							color: var(--color-text);
