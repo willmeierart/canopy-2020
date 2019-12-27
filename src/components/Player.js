@@ -3,17 +3,23 @@ import { useEffect, useRef, useState } from 'react'
 const Player = ({ src, muted = true, onClick }) => {
 	const videoRef = useRef(null)
 	const [isMuted, setMuted] = useState(muted)
-	// useEffect(() => {
-	// 	console.log(videoRef.current?.onplay)
-	// }, [src, onClick, videoRef.current])
+	const [vidHeight, setVidHeight] = useState(0)
+	useEffect(() => {
+		setVidHeight(videoRef.current?.getBoundingClientRect().height || 0)
+	}, [videoRef.current, isMuted])
 
 	const handleClick = () => {
-		if (onClick) return onClick()
 		setMuted(!isMuted)
+		if (onClick) return onClick(videoRef)
 	}
 
 	return (
-		<div>
+		<div className="container">
+			{isMuted && (
+				<div className="overlay" onClick={handleClick}>
+					<img src="/static/images/mute.png" />
+				</div>
+			)}
 			<video
 				autoPlay
 				loop
@@ -24,9 +30,25 @@ const Player = ({ src, muted = true, onClick }) => {
 				src={src}
 			/>
 			<style jsx>{`
+				.container {
+					position: relative;
+				}
+
+				.overlay {
+					align-items: center;
+					cursor: pointer;
+					display: flex;
+					height: ${vidHeight}px;
+					justify-content: center;
+					position: absolute;
+					width: 100%;
+					z-index: 1000;
+				}
+
 				video {
-					cursor: ${muted ? 'pointer' : 'default'};
+					position: absolute;
 					width: 100vw;
+					z-index: 500;
 				}
 			`}</style>
 		</div>
