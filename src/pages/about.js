@@ -1,29 +1,8 @@
-import Link from 'next/link'
 import { useQuery } from '@apollo/react-hooks'
 import ABOUT_QUERY from 'lib/queries/about.query';
+import { configureLayoutA } from 'lib/helpers'
 import { routes } from 'server/routes'
 import Grid from 'components/Grid'
-
-const calcColumns = width => {
-	switch (true) {
-		case width > 1000:
-			return 9
-		case width > 500:
-			return Math.floor((width - 100) / 100)
-		default:
-			return 1
-	}
-}
-
-const configureLayout = (width, height) => {
-	const columns = calcColumns(width)
-	const gutterTotal = (columns + 1) * 10
-	const squareSize = Math.floor((width - gutterTotal) / columns)
-	const heightMinusHeader = height - 100 - gutterTotal
-	const rows = (heightMinusHeader - (heightMinusHeader % squareSize)) / squareSize
-	const total = columns * rows
-	return { columns, squareSize, total }
-}
 
 const AboutModule = ({ idx, layout, data }) => {
 	const bgColor = () => {
@@ -50,8 +29,9 @@ const AboutModule = ({ idx, layout, data }) => {
 					color: ${background === '#dfdfdd' ? '#696964' : '#fff'};
 					cursor: ${data[idx]?.link ? 'pointer' : 'default'};
 					height: ${layout.squareSize}px;
-					max-width: ${layout.squareSize}px;
-					padding: 1rem;
+					line-height: .9rem;
+					width: ${layout.squareSize}px;
+					padding: .5rem;
 				}
 				.block:hover {
 					filter: brightness(90%);
@@ -62,7 +42,21 @@ const AboutModule = ({ idx, layout, data }) => {
 	)
 
 	return idx === layout.total - 1
-		? <a target="_blank" href={routes.PRIVACY.path}>terms and conditions</a>
+		? (
+			<a target="_blank"href={routes.PRIVACY.path}>
+				terms and conditions
+				<style jsx>{`
+					a {
+						background: #dfdfdd;
+						box-sizing: border-box;
+						padding: .5rem;
+					}
+					a:hover {
+						filter: brightness(90%);
+						transition: filter .5s;
+					}
+				`}</style>
+			</a>)
 		: !!(data[idx]?.link)
 			? <a href={data[idx].link} target="_blank"><Default /></a>
 			: <Default />
@@ -72,7 +66,7 @@ const About = () => {
 	const { data, loading, error } = useQuery(ABOUT_QUERY);
 	return (
 		<div className="container">
-			{data && <Grid BlockElement={AboutModule} configureLayout={configureLayout} data={data.aboutModules} />}
+			{data && <Grid BlockElement={AboutModule} configureLayout={configureLayoutA} data={data.aboutModules} />}
 		</div>
 	)
 }
