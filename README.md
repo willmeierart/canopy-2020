@@ -1,3 +1,3 @@
 ## Canopy
 
-This is the portfolio site for creative media studio, Canopy.
+This is the portfolio site for creative media studio, Canopy, built with NextJS and Apollo Client.
