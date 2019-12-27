@@ -17,11 +17,12 @@ const Header = () => {
 					align-items: flex-end;
 					display: flex;
 					justify-content: space-between;
-					padding: 3rem 1rem 1rem 1rem
+					padding: 10px;
+					padding-top: 30px;
 				}
 				img {
 					cursor: pointer;
-					max-height: 2rem;
+					max-height: 1.25rem;
 				}
 				img:hover {
 					filter: brightness(400%);

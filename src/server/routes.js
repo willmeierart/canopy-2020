@@ -2,22 +2,22 @@ const routes = {
 	ABOUT: {
 		path: '/about',
 		page: 'about',
-		title: 'About'
+		title: 'about'
 	},
 	HOME: {
 		path: '/',
 		page: 'index',
-		title: 'Home'
+		title: 'home'
 	},
 	PORTFOLIO: {
 		path: '/portfolio/film-animation',
 		page: 'portfolio',
-		title: 'Film & Animation'
+		title: 'film & animation'
 	},
 	PRIVACY: {
 		path: '/privacy',
 		page: 'privacy',
-		title: 'Terms & Conditions'
+		title: 'terms & conditions'
 	},
 }
 
