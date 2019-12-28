@@ -1,39 +1,64 @@
 import Router from 'next/router'
-import { routes } from 'server/routes'
+import { routes } from 'lib/routes'
 
 const PortfolioModule = ({ idx, layout, data, onClick }) => {
 	const handleClick = (blockData) => {
 		onClick && onClick(blockData)
-		// Router.replace(routes.PORTFOLIO.path, `${routes.PORTFOLIO.path}/${blockData.slug || idx}`, { shallow: true })
 	}
 
 	const item = data[idx]
 
 	return item ? (
-		<div className="block" onClick={() => handleClick(data[idx]?.url)}>
-			{item.text}
+		<div className="block" onClick={() => handleClick(data[idx])}>
+			<div className="text">{item.text}</div>
+			<div className="overlay" />
 			<style jsx>{`
 				.block {
-					background: url('${item.thumbnail.url}');
 					background-size: contain;
 					box-sizing: border-box;
 					color: rgba(255,255,255,0);
-					cursor: ${item.link ? 'pointer' : 'default'};
+					cursor: pointer;
 					height: ${layout.squareSize}px;
-					line-height: .9rem;
-					width: ${layout.squareSize}px;
 					overflow: hidden;
-					padding: .5rem;
+					position: relative;
+					transition: color .5s;
+					white-space: pre-wrap;
+					width: ${layout.squareSize}px;
 				}
 				.block:hover {
-					filter: brightness(75%);
 					color: rgba(255,255,255,1);
-					cursor: pointer;
-					transition: filter .5s, color .5s;
 				}
+				.text {
+					color: inherit;
+					cursor: pointer;
+					height: inherit;
+					line-height: .9rem;
+					padding: .5rem;
+					pointer-events: none;
+					position: absolute;
+					width: inherit;
+					z-index: 5;
+				}
+				.overlay {
+					background: url('${item.thumbnail.url}');
+					cursor: pointer;
+					height: inherit;
+					position: absolute;
+					width: inherit;
+				}
+				.overlay:hover {
+					filter: brightness(65%);
+					transition: filter .5s;
+				}
+				
 			`}</style>
 		</div>
 	) : null
+}
+
+PortfolioModule.getInititalProps = ({ query }) => {
+	console.log(query)
+	
 }
 
 export default PortfolioModule

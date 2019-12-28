@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 const PaginationControls = ({ onPageChange, page, perPage, total }) => {
 	const totalMarkers = Math.ceil(total / perPage)
 	return (
@@ -22,15 +20,20 @@ const PaginationControls = ({ onPageChange, page, perPage, total }) => {
 					justify-content: center;
 				}
 				.marker {
-					background: lightgrey;
+					background: var(--color-grey-light);
 					cursor: pointer;
 					height: 10px;
 					margin: 2px;
+					transition: background .5s;
 					width: 10px;
+				}
+				.marker:hover {
+					background: var(--color-grey);
 				}
 				.active {
 					border: 1px solid black;
 					cursor: default;
+					background: var(--color-grey);
 				}
 			`}</style>
 		</div>

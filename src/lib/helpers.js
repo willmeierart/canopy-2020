@@ -5,7 +5,7 @@ const calcColumnsA = width => {
 		case width > 500:
 			return Math.floor((width - 100) / 100)
 		default:
-			return 2
+			return 1
 	}
 }
 
