@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/react-hooks'
-import PORTFILIO_QUERY from 'lib/queries/portfolio.query';
+import PORTFOLIO_QUERY from 'lib/queries/portfolio.query';
 import { configureLayoutA } from 'lib/helpers'
 import Grid from 'components/Grid'
 import PaginationControls from 'components/PaginationControls'
-import Player from 'components/Player'
 import PortfolioModule from 'components/PortfolioModule'
 
 const Portfolio = () => {
-	const [playerOpen, setPlayerOpen] = useState(false)
-	const [videoSrc, setVideoSrc] = useState('')
+	const router = useRouter()
 
 	const [itemCount, setItemCount] = useState(1)
 	const [isPaginated, setIsPaginated] = useState(false)
@@ -18,18 +17,13 @@ const Portfolio = () => {
 	const [totalModulesPerPage, setTotalModulesPerPage] = useState(1)
 	const [queryBatch, setQueryBatch] = useState('0-10')
 
-	const { data, loading, error } = useQuery(PORTFILIO_QUERY({
+	const { data, loading, error } = useQuery(PORTFOLIO_QUERY({
 		first: queryBatch.split('-')[1],
 		skip: queryBatch.split('-')[0],
 	}));
 
-	const handleVidClick = videoRef => {
-		!videoRef.current.muted && setPlayerOpen(false)
-	}
-
-	const handleBlockClick = url => {
-		setPlayerOpen(true)
-		setVideoSrc(url)
+	const handleBlockClick = blockData => {
+		router.push(`/portfolio/${blockData?.slug}`, `/portfolio/${blockData?.slug}`, { shallow: true })
 	}
 
 	const handlePageChange = pageNumber => {
@@ -61,35 +55,33 @@ const Portfolio = () => {
 
 	return (
 		<div>
-			{data && playerOpen
-				? <Player src={videoSrc} onClick={handleVidClick} />
-				: data && itemCount && (
-					<div className="container">
-						<Grid
-							BlockElement={PortfolioModule}
-							configureLayout={configureLayoutA}
-							data={data.portfolioModules}
-							layoutChangeCallback={handleLayoutChangePagination}
-							onBlockClick={handleBlockClick}
+			{data && itemCount && (
+				<div className="container">
+					<Grid
+						BlockElement={PortfolioModule}
+						configureLayout={configureLayoutA}
+						data={data.portfolioModules}
+						layoutChangeCallback={handleLayoutChangePagination}
+						onBlockClick={handleBlockClick}
+					/>
+					{isPaginated && (
+						<PaginationControls
+							onPageChange={handlePageChange}
+							page={page}
+							perPage={totalModulesPerPage}
+							total={itemCount}
 						/>
-						{isPaginated && (
-							<PaginationControls
-								onPageChange={handlePageChange}
-								page={page}
-								perPage={totalModulesPerPage}
-								total={itemCount}
-							/>
-						)}
-						<style jsx>{`
-							.container {
-								align-items: center;
-								display: flex;
-								flex-direction: column;
-								justify-content: center;
-							}
-						`}</style>
-					</div>
-				)}
+					)}
+					<style jsx>{`
+						.container {
+							align-items: center;
+							display: flex;
+							flex-direction: column;
+							justify-content: center;
+						}
+					`}</style>
+				</div>
+			)}
 		</div>
 	)
 }
