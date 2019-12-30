@@ -34,7 +34,7 @@ const AboutModule = ({ idx, layout, data }) => {
 					padding: .5rem;
 				}
 				.block:hover {
-					filter: brightness(90%);
+					filter: brightness(65%);
 					transition: filter .5s;
 				}
 			`}</style>
@@ -63,8 +63,8 @@ const AboutModule = ({ idx, layout, data }) => {
 }
 
 const About = () => {
-	const { data, loading, error } = useQuery(ABOUT_QUERY);
-	return (
+	const { data } = useQuery(ABOUT_QUERY);
+	return data && (
 		<div className="container">
 			{data && <Grid BlockElement={AboutModule} configureLayout={configureLayoutA} data={data.aboutModules} />}
 		</div>

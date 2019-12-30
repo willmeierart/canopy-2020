@@ -1,12 +1,12 @@
 const calcColumnsA = width => {
 	switch (true) {
-		case width > 1000:
+		case width > 1100:
 			return 9
-		case width > 800:
+		case width > 900:
+			return 7
+		case width > 700:
 			return 5
-		case width > 600:
-			return 3
-		case width > 500:
+		case width > 300:
 			return Math.floor((width - 100) / 100)
 		default:
 			return 1
@@ -32,4 +32,16 @@ export const configureLayoutB = (width, height, callback) => {
 	const layoutVals = { columns, squareSize, total: 36 }
 	callback && callback(layoutVals)
 	return layoutVals
+}
+
+export 	const rfs = el => {
+	if (el.requestFullscreen) {
+		el.requestFullscreen()
+	} else if (el.mozRequestFullScreen) {
+		el.mozRequestFullScreen()
+	} else if (el.webkitRequestFullscreen) {
+		el.webkitRequestFullscreen()
+	} else if (el.msRequestFullscreen) {
+		el.msRequestFullscreen()
+	}
 }

@@ -1,7 +1,4 @@
-import Router from 'next/router'
-import { routes } from 'lib/routes'
-
-const PortfolioModule = ({ idx, layout, data, onClick }) => {
+const PortfolioModuleDesktop = ({ idx, layout, data, onClick }) => {
 	const handleClick = (blockData) => {
 		onClick && onClick(blockData)
 	}
@@ -14,7 +11,6 @@ const PortfolioModule = ({ idx, layout, data, onClick }) => {
 			<div className="overlay" />
 			<style jsx>{`
 				.block {
-					background-size: contain;
 					box-sizing: border-box;
 					color: rgba(255,255,255,0);
 					cursor: pointer;
@@ -27,8 +23,10 @@ const PortfolioModule = ({ idx, layout, data, onClick }) => {
 				}
 				.block:hover {
 					color: rgba(255,255,255,1);
+					transition: color .5s;
 				}
 				.text {
+					box-sizing: border-box;
 					color: inherit;
 					cursor: pointer;
 					height: inherit;
@@ -41,9 +39,13 @@ const PortfolioModule = ({ idx, layout, data, onClick }) => {
 				}
 				.overlay {
 					background: url('${item.thumbnail.url}');
+					background-repeat: no-repeat;
+					background-size: cover;
+					box-sizing: border-box;
 					cursor: pointer;
 					height: inherit;
 					position: absolute;
+					transition: color .5s;
 					width: inherit;
 				}
 				.overlay:hover {
@@ -56,9 +58,4 @@ const PortfolioModule = ({ idx, layout, data, onClick }) => {
 	) : null
 }
 
-PortfolioModule.getInititalProps = ({ query }) => {
-	console.log(query)
-	
-}
-
-export default PortfolioModule
+export default PortfolioModuleDesktop

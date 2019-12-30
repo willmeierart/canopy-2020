@@ -1,16 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 
-const Player = ({ src, muted = true, onClick }) => {
+const Player = ({ muted = true, onClick, src }) => {
 	const videoRef = useRef(null)
 	const [isMuted, setMuted] = useState(muted)
 	const [vidHeight, setVidHeight] = useState(0)
+
 	useEffect(() => {
 		setVidHeight(videoRef.current?.getBoundingClientRect().height || 0)
 	}, [videoRef.current, isMuted])
 
 	const handleClick = () => {
-		setMuted(!isMuted)
-		if (onClick) return onClick(videoRef)
+		if (onClick) {
+			setMuted(false)
+			onClick(videoRef)
+		} else {
+			setMuted(!isMuted)
+		}
 	}
 
 	return (
