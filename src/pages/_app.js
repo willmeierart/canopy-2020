@@ -3,6 +3,7 @@ import App from 'next/app'
 import Layout from 'layout/Layout'
 import withData from 'lib/apollo/client'
 import { ApolloProvider } from '@apollo/react-hooks';
+import { PageTransition } from 'next-page-transitions'
 
 class Application extends App {
 	static async getInitialProps ({ Component, ctx }) {
@@ -24,7 +25,17 @@ class Application extends App {
 		return (
 			<ApolloProvider client={apollo}>
 				<Layout router={router}>
-					<Component {...pageProps} router={router} />
+					<PageTransition
+						skipInititalTransition
+						timeout={300}
+						classNames="page-transition"
+					>
+						<Component
+							{...pageProps}
+							key={router.route + (router.query.page || '')}
+							router={router}
+						/>
+					</PageTransition>
 					<style jsx global>{`
 						@font-face {
 							font-family: 'pixelmix';
@@ -65,6 +76,20 @@ class Application extends App {
 						}
 						li {
 							list-style: none;
+						}
+						.page-transition-enter {
+							opacity: 0;
+						}
+						.page-transition-enter-active {
+							opacity: 1;
+							transition: opacity 300ms;
+						}
+						.page-transition-exit {
+							opacity: 1;
+						}
+						.page-transition-exit-active {
+							opacity: 0;
+							transition: opacity 300ms;
 						}
 					`}</style>
 				</Layout>

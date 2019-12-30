@@ -5,7 +5,7 @@ import { rfs } from 'lib/helpers'
 import Player from 'components/Player'
 import PortfolioModuleMobile from './PortfolioModuleMobile'
 
-const PortfolioMobile = ({ width }) => {
+const PortfolioMobile = ({ onLoaded, width }) => {
 	const [vidOpen, setVidOpen] = useState(false)
 	const [vidSrc, setVidSrc] = useState(null)
 
@@ -21,6 +21,8 @@ const PortfolioMobile = ({ width }) => {
 			? rfs(videoRef.current)
 			: setVidOpen(false)
 	}
+
+	useEffect(() => { data && onLoaded() }, [])
 
 	return (
 		<div>

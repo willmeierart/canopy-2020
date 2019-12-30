@@ -64,7 +64,7 @@ const AboutModule = ({ idx, layout, data }) => {
 
 const About = () => {
 	const { data } = useQuery(ABOUT_QUERY);
-	return data && (
+	return (
 		<div className="container">
 			{data && <Grid BlockElement={AboutModule} configureLayout={configureLayoutA} data={data.aboutModules} />}
 		</div>

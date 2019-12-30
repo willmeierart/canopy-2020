@@ -7,7 +7,7 @@ import Grid from 'components/Grid'
 import PaginationControls from 'components/PaginationControls'
 import PortfolioModuleDesktop from './PortfolioModuleDesktop'
 
-const PortfolioDesktop = () => {
+const PortfolioDesktop = ({ onLoaded }) => {
 	const router = useRouter()
 
 	const [itemCount, setItemCount] = useState(1)
@@ -40,6 +40,8 @@ const PortfolioDesktop = () => {
 
 		setLayoutInited(true)
 	}
+
+	useEffect(() => { data && onLoaded() }, [])
 
 	useEffect(() => {
 		setItemCount(data?.portfolioModulesConnection.aggregate.count || 0)
