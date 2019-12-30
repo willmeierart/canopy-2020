@@ -3,7 +3,7 @@ import HOME_QUERY from 'lib/queries/home.query';
 import Player from 'components/Player'
 
 const Home = () => {
-	const { data, loading, error } = useQuery(HOME_QUERY);
+	const { data } = useQuery(HOME_QUERY);
 	const videoSrc = data?.homepageSliders[0].url
 
 	return (

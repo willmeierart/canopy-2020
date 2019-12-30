@@ -30,6 +30,7 @@ const Portfolio = () => {
 		const newQuerySkip = totalModulesPerPage * (pageNumber - 1)
 		setPage(pageNumber)
 		setQueryBatch(`${newQuerySkip}-${totalModulesPerPage * pageNumber}`)
+		router.push('/portfolio', `/portfolio?page=${pageNumber}&per_page=${totalModulesPerPage}`, { shallow: true })
 	}
 
 	const handleLayoutChangePagination = ({ total: totalSquares }) => {

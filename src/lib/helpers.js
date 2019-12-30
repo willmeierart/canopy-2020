@@ -2,6 +2,10 @@ const calcColumnsA = width => {
 	switch (true) {
 		case width > 1000:
 			return 9
+		case width > 800:
+			return 5
+		case width > 600:
+			return 3
 		case width > 500:
 			return Math.floor((width - 100) / 100)
 		default:

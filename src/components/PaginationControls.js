@@ -31,7 +31,6 @@ const PaginationControls = ({ onPageChange, page, perPage, total }) => {
 					background: var(--color-grey);
 				}
 				.active {
-					border: 1px solid black;
 					cursor: default;
 					background: var(--color-grey);
 				}
