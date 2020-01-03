@@ -1,9 +1,10 @@
 import '@babel/polyfill'
 import App from 'next/app'
-import Layout from 'layout/Layout'
+import Head from 'next/head'
 import withData from 'lib/apollo/client'
 import { ApolloProvider } from '@apollo/react-hooks';
 import { PageTransition } from 'next-page-transitions'
+import Layout from 'layout/Layout'
 
 class Application extends App {
 	static async getInitialProps ({ Component, ctx }) {
@@ -25,6 +26,12 @@ class Application extends App {
 		return (
 			<ApolloProvider client={apollo}>
 				<Layout router={router}>
+					<Head>
+						<meta property="og:type" content="website" />
+						<meta property="og:site_name" content="canopy" />
+						<meta property="og:locale" content="en_US" />
+						<meta name="twitter:card" content="summary" />
+					</Head>
 					<PageTransition
 						skipInititalTransition
 						timeout={300}

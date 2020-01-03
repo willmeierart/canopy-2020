@@ -5,19 +5,20 @@ import PORTFOLIO_ITEM_QUERY from 'lib/queries/portfolioItem.query';
 import { useWindowSize } from 'lib/hooks'
 import { rfs } from 'lib/helpers'
 import Player from 'components/Player'
+import PageHead from 'layout/PageHead'
 
 const PortfolioItem = () => {
 	const router = useRouter()
 	const [isMobile, setIsMobile] = useState(false)
 	const { width } = useWindowSize()
 
-	const { data } = useQuery(PORTFOLIO_ITEM_QUERY({ slug: router.query.slug || '' }));
-
-	useEffect(() => { setIsMobile(width < 500) }, [width < 500])
+	const { data, error } = useQuery(PORTFOLIO_ITEM_QUERY({ slug: router.query.slug || '' }));
 
 	useEffect(() => {
-		!data?.portfolioModule?.url && router.push('/portfolio', '/portfolio', { shallow: true })
+		(!data?.portfolioModule?.url || error) && router.push('/portfolio', '/portfolio', { shallow: true })
 	}, [])
+
+	useEffect(() => { setIsMobile(width < 500) }, [width < 500])
 
 	const handleVidClick = videoRef => {
 		videoRef.current.muted
@@ -25,8 +26,9 @@ const PortfolioItem = () => {
 			: router.push('/portfolio', '/portfolio', { shallow: true })
 	}
 
-	return (
+	return error ? null : (
 		<div className="container">
+			<PageHead metadata={data?.portfolioModule} />
 			{data?.portfolioModule?.url && <Player fullscreen={isMobile} src={data.portfolioModule.url} onClick={handleVidClick} />}
 			<style jsx>{`
 				.container {

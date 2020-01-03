@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useWindowSize } from 'lib/hooks'
-
 import PortfolioDesktop from 'components/Portfolio/PortfolioDesktop'
 import PortfolioMobile from 'components/Portfolio/PortfolioMobile'
 

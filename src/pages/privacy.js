@@ -1,6 +1,9 @@
+import PageHead from 'layout/PageHead'
+
 const Privacy = () => {
 	return (
 		<div className="container">
+			<PageHead />
 			<div className="privacy">
 				<h1>PRIVACY POLICY</h1>
 				<div>
@@ -766,6 +769,7 @@ const Privacy = () => {
 			<style jsx>{`
 				.container {
 					color: black;
+					margin: 100px;
 				}
 				h1 {
 					width: 100%;

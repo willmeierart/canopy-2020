@@ -4,6 +4,7 @@ import PORTFOLIO_QUERY from 'lib/queries/portfolio.query';
 import { rfs } from 'lib/helpers'
 import Player from 'components/Player'
 import PortfolioModuleMobile from './PortfolioModuleMobile'
+import PageHead from 'layout/PageHead'
 
 const PortfolioMobile = ({ onLoaded, width }) => {
 	const [vidOpen, setVidOpen] = useState(false)
@@ -28,6 +29,7 @@ const PortfolioMobile = ({ onLoaded, width }) => {
 		<div>
 			{data && (
 				<>
+					<PageHead metadata={data.pageMetadata} />
 					{vidOpen && (
 						<Player
 							horizontal

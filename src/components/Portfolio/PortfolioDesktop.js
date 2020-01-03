@@ -6,6 +6,7 @@ import { configureLayoutA } from 'lib/helpers'
 import Grid from 'components/Grid'
 import PaginationControls from 'components/PaginationControls'
 import PortfolioModuleDesktop from './PortfolioModuleDesktop'
+import PageHead from 'layout/PageHead'
 
 const PortfolioDesktop = ({ onLoaded }) => {
 	const router = useRouter()
@@ -57,6 +58,7 @@ const PortfolioDesktop = ({ onLoaded }) => {
 		<div>
 			{data && itemCount && (
 				<div className="container">
+					<PageHead metadata={data.pageMetadata} />
 					<Grid
 						BlockElement={PortfolioModuleDesktop}
 						configureLayout={configureLayoutA}
