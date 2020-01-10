@@ -768,8 +768,8 @@ const Privacy = () => {
 			</div>
 			<style jsx>{`
 				.container {
-					color: black;
-					margin: 100px;
+					color: var(--color--text);
+					margin: 10px;
 				}
 				h1 {
 					width: 100%;

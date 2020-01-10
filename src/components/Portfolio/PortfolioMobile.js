@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import PORTFOLIO_QUERY from 'lib/queries/portfolio.query';
-import { rfs } from 'lib/helpers'
 import Player from 'components/Player'
 import PortfolioModuleMobile from './PortfolioModuleMobile'
 import PageHead from 'layout/PageHead'
@@ -10,18 +9,14 @@ const PortfolioMobile = ({ onLoaded, width }) => {
 	const [vidOpen, setVidOpen] = useState(false)
 	const [vidSrc, setVidSrc] = useState(null)
 
-	const { data, loading, error } = useQuery(PORTFOLIO_QUERY());
+	const { data } = useQuery(PORTFOLIO_QUERY());
 
 	const handleBlockClick = item => {
 		setVidOpen(true)
 		setVidSrc(item.url)
 	}
 
-	const handleVidClick = videoRef => {
-		videoRef.current.muted
-			? rfs(videoRef.current)
-			: setVidOpen(false)
-	}
+	const handleVidClick = () => setVidOpen(false)
 
 	useEffect(() => { data && onLoaded() }, [])
 

@@ -1,24 +1,24 @@
-const calcColumnsA = width => {
+const calcColumns = width => {
 	switch (true) {
 		case width > 1100:
 			return 9
-		case width > 900:
+		case width > 800:
 			return 7
-		case width > 700:
+		case width > 600:
 			return 5
-		case width > 300:
+		case width > 400:
 			return Math.floor((width - 100) / 100)
 		default:
 			return 1
 	}
 }
 
-export const configureLayoutA = (width, height, callback) => {
-	const columns = calcColumnsA(width)
+export const configureLayout = (width, height, callback, numItems) => {
+	const columns = calcColumns(width)
 	const gutterTotal = (columns + 1) * 10
 	const squareSize = Math.floor((width - gutterTotal) / columns)
-	const heightMinusHeader = height - 100 - gutterTotal
-	const rows = (heightMinusHeader - (heightMinusHeader % squareSize)) / squareSize
+	const heightMinusHeader = height - 50 - gutterTotal
+	const rows = columns > 1 ? (heightMinusHeader - (heightMinusHeader % squareSize)) / squareSize : numItems || 7
 	const total = columns * rows
 	const layoutVals = { columns, squareSize, total }
 	callback && callback(layoutVals)

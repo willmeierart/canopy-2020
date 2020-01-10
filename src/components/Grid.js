@@ -20,7 +20,7 @@ const Grid = ({ BlockElement, configureLayout, data, layoutChangeCallback, onBlo
 	})
 
 	useEffect(() => {
-		const newLayout = configureLayout(windowWidth, windowHeight, layoutChangeCallback) // needs debouncing
+		const newLayout = configureLayout(windowWidth, windowHeight, layoutChangeCallback, data.length + 1) // needs debouncing
 		setLayout(newLayout)
 	}, [windowWidth, windowHeight])
 

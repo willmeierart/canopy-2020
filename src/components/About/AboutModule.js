@@ -44,6 +44,7 @@ const AboutModule = ({ idx, layout, data }) => {
 				<style jsx>{`
 					a {
 						background: #dfdfdd;
+						height: ${layout.squareSize}px;
 						box-sizing: border-box;
 						padding: .5rem;
 					}

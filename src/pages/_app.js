@@ -31,6 +31,13 @@ class Application extends App {
 						<meta property="og:site_name" content="canopy" />
 						<meta property="og:locale" content="en_US" />
 						<meta name="twitter:card" content="summary" />
+						<meta name="theme-color" content="#676767" />
+						<link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+						<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+						<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+						<link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+						<link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+						<link rel="manifest" href="/site.webmanifest" />
 					</Head>
 					<PageTransition
 						skipInititalTransition
@@ -45,16 +52,18 @@ class Application extends App {
 					</PageTransition>
 					<style jsx global>{`
 						@font-face {
+							font-display: swap;
 							font-family: 'pixelmix';
+							font-style: normal;
 							src: url('/static/fonts/pixelmix-bold.woff2') format('woff2'), url('/static/fonts/pixelmix-bold.woff') format('woff');
 							font-weight: bold;
-							font-style: normal;
 						}
 						@font-face {
+							font-display: swap;
 							font-family: 'pixelmix';
+							font-style: normal;
 							src: url('/static/fonts/pixelmix.woff2') format('woff2'), url('/static/fonts/pixelmix.woff') format('woff');
 							font-weight: normal;
-							font-style: normal;
 						}
 						body {
 							--color-grey-darkest: #676767;

@@ -5,10 +5,10 @@ const PortfolioModuleDesktop = ({ idx, layout, data, onClick }) => {
 
 	const item = data[idx]
 
-	return item ? (
+	return item && item.thumbnail ? (
 		<div className="block" onClick={() => handleClick(data[idx])}>
 			<div className="text">{item.text}</div>
-			<div className="overlay" />
+			<img alt={`portfolio item ${item.slug?.replace(/-/g, ' ')}`} src={item.thumbnail.url} className="overlay" />
 			<style jsx>{`
 				.block {
 					box-sizing: border-box;
@@ -38,9 +38,6 @@ const PortfolioModuleDesktop = ({ idx, layout, data, onClick }) => {
 					z-index: 5;
 				}
 				.overlay {
-					background: url('${item.thumbnail.url}');
-					background-repeat: no-repeat;
-					background-size: cover;
 					box-sizing: border-box;
 					cursor: pointer;
 					height: inherit;

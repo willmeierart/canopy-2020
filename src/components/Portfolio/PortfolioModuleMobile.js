@@ -19,7 +19,11 @@ const PortfolioModuleMobile = ({ item, onClick, width }) => {
 	return item ? (
 		<div className={`block ${isActive && 'block-hovered'}`} onClick={handleClick}>
 			<div className="text">{item.text}</div>
-			<div className={`overlay ${isActive && 'overlay-hovered'}`} />
+			<img
+				alt={`portfolio item ${item.slug?.replace(/-/g, ' ')}`}
+				className={`overlay ${isActive && 'overlay-hovered'}`}
+				src={item.thumbnail?.url}
+			/>
 			<style jsx>{`
 				.block {
 					box-sizing: border-box;
@@ -29,7 +33,6 @@ const PortfolioModuleMobile = ({ item, onClick, width }) => {
 					margin-bottom: 10px;
 					overflow: hidden;
 					position: relative;
-					transform: rotate(90deg);
 					transition: color .5s;
 					white-space: pre-wrap;
 					width: ${width}px;
@@ -51,9 +54,6 @@ const PortfolioModuleMobile = ({ item, onClick, width }) => {
 					z-index: 5;
 				}
 				.overlay {
-					background: url('${item.thumbnail.url}');
-					background-repeat: no-repeat;
-					background-size: cover;
 					box-sizing: border-box;
 					cursor: pointer;
 					height: inherit;

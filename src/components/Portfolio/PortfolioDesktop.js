@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/react-hooks'
 import PORTFOLIO_QUERY from 'lib/queries/portfolio.query';
-import { configureLayoutA } from 'lib/helpers'
+import { configureLayout } from 'lib/helpers'
 import Grid from 'components/Grid'
 import PaginationControls from 'components/PaginationControls'
 import PortfolioModuleDesktop from './PortfolioModuleDesktop'
@@ -18,7 +18,7 @@ const PortfolioDesktop = ({ onLoaded }) => {
 	const [totalModulesPerPage, setTotalModulesPerPage] = useState(1)
 	const [queryBatch, setQueryBatch] = useState([0, 10])
 
-	const { data, loading, error } = useQuery(PORTFOLIO_QUERY({ first: queryBatch[1], skip: queryBatch[0] }));
+	const { data } = useQuery(PORTFOLIO_QUERY({ first: queryBatch[1], skip: queryBatch[0] }));
 
 	const handleBlockClick = blockData => {
 		router.push(`/portfolio/${blockData?.slug}`, `/portfolio/${blockData?.slug}`, { shallow: true })
@@ -61,7 +61,7 @@ const PortfolioDesktop = ({ onLoaded }) => {
 					<PageHead metadata={data.pageMetadata} />
 					<Grid
 						BlockElement={PortfolioModuleDesktop}
-						configureLayout={configureLayoutA}
+						configureLayout={configureLayout}
 						data={data.portfolioModules}
 						layoutChangeCallback={handleLayoutChangePagination}
 						onBlockClick={handleBlockClick}

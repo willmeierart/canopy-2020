@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/react-hooks'
 import PORTFOLIO_ITEM_QUERY from 'lib/queries/portfolioItem.query';
 import { useWindowSize } from 'lib/hooks'
-import { rfs } from 'lib/helpers'
 import Player from 'components/Player'
 import PageHead from 'layout/PageHead'
 
@@ -20,11 +19,7 @@ const PortfolioItem = () => {
 
 	useEffect(() => { setIsMobile(width < 500) }, [width < 500])
 
-	const handleVidClick = videoRef => {
-		videoRef.current.muted
-			? isMobile && rfs(videoRef.current)
-			: router.push('/portfolio', '/portfolio', { shallow: true })
-	}
+	const handleVidClick = () => router.push('/portfolio', '/portfolio', { shallow: true })
 
 	return error ? null : (
 		<div className="container">
@@ -33,7 +28,6 @@ const PortfolioItem = () => {
 			<style jsx>{`
 				.container {
 					height: fit-content;
-					transform: rotate(${isMobile ? 90 : 0}deg;
 					width: fit-content;
 				}
 			`}</style>

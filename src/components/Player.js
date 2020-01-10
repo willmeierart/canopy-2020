@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const Player = ({ muted = true, onClick, src }) => {
+const Player = ({ homepage, muted = false, onClick, src }) => {
 	const videoRef = useRef(null)
 	const [isMuted, setMuted] = useState(muted)
 	const [vidHeight, setVidHeight] = useState(0)
@@ -22,11 +22,12 @@ const Player = ({ muted = true, onClick, src }) => {
 		<div className="container">
 			{isMuted && (
 				<div className="overlay" onClick={handleClick}>
-					<img src="/static/images/mute.png" />
+					<img alt="mute-btn" src="/static/images/mute.png" />
 				</div>
 			)}
 			<video
 				autoPlay
+				controls={!homepage}
 				loop
 				muted={isMuted}
 				onClick={handleClick}
@@ -45,12 +46,14 @@ const Player = ({ muted = true, onClick, src }) => {
 					display: flex;
 					height: ${vidHeight}px;
 					justify-content: center;
+					max-height: calc(100vh - 120px);
 					position: absolute;
 					width: 100%;
 					z-index: 1000;
 				}
 
 				video {
+					max-height: calc(100vh - 120px);
 					position: absolute;
 					width: 100vw;
 					z-index: 500;

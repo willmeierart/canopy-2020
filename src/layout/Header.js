@@ -7,7 +7,7 @@ const Header = () => {
 	return (
 		<header>
 			<Link href={HOME.path}>
-				<img src="/static/images/logo.png" />
+				<img alt="logo" src="/static/images/logo.png" />
 			</Link>
 			<div>
 				{[PORTFOLIO, ABOUT].map((route, i) => <Link key={`link-${i}`} href={route.path}><span>{route.title}</span></Link>)}
