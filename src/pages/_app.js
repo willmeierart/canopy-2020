@@ -52,18 +52,11 @@ class Application extends App {
 					</PageTransition>
 					<style jsx global>{`
 						@font-face {
-							font-display: swap;
-							font-family: 'pixelmix';
-							font-style: normal;
-							src: url('/static/fonts/pixelmix-bold.woff2') format('woff2'), url('/static/fonts/pixelmix-bold.woff') format('woff');
-							font-weight: bold;
-						}
-						@font-face {
-							font-display: swap;
-							font-family: 'pixelmix';
-							font-style: normal;
-							src: url('/static/fonts/pixelmix.woff2') format('woff2'), url('/static/fonts/pixelmix.woff') format('woff');
+							font-family: 'Montserrat';
+							src: url('/static/fonts/Montserrat-Regular.woff2') format('woff2'),
+								url('/static/fonts/Montserrat-Regular.woff') format('woff');
 							font-weight: normal;
+							font-style: normal;
 						}
 						body {
 							--color-grey-darkest: #676767;
@@ -79,8 +72,8 @@ class Application extends App {
 							background: var(--color-background);
 							box-sizing: border-box;
 							color: var(--color-text);
-							font-family: 'pixelmix', sans-serif;
-							font-size: 10px;
+							font-family: 'Montserrat', sans-serif;
+							font-size: 12px;
 							height: 100vh;
 							margin: 0;
 							padding: 0;

@@ -28,6 +28,7 @@ const AboutModule = ({ idx, layout, data }) => {
 					line-height: .9rem;
 					width: ${layout.squareSize}px;
 					padding: .5rem;
+					white-space: pre-wrap;
 				}
 				.block:hover {
 					filter: brightness(65%);

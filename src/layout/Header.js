@@ -25,7 +25,7 @@ const Header = () => {
 					max-height: 1.25rem;
 				}
 				img:hover {
-					filter: brightness(400%);
+					filter: brightness(175%);
 					transition: filter .5s;
 				}
 				span {
