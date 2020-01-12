@@ -26,9 +26,10 @@ const AboutModule = ({ idx, layout, data }) => {
 					cursor: ${data[idx]?.link ? 'pointer' : 'default'};
 					height: ${layout.squareSize}px;
 					line-height: .9rem;
-					width: ${layout.squareSize}px;
+					overflow: hidden;
 					padding: .5rem;
 					white-space: pre-wrap;
+					width: ${layout.squareSize}px;
 				}
 				.block:hover {
 					filter: brightness(65%);

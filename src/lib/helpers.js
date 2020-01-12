@@ -17,8 +17,8 @@ export const configureLayout = (width, height, callback, numItems) => {
 	const columns = calcColumns(width)
 	const gutterTotal = (columns + 1) * 10
 	const squareSize = Math.floor((width - gutterTotal) / columns)
-	const heightMinusHeader = height - 50 - gutterTotal
-	const rows = columns > 1 ? (heightMinusHeader - (heightMinusHeader % squareSize)) / squareSize : numItems || 7
+	const heightMinusHeader = height - gutterTotal
+	const rows = Math.max((columns > 1 ? (heightMinusHeader - (heightMinusHeader % squareSize)) / squareSize : numItems || 7), 1)
 	const total = columns * rows
 	const layoutVals = { columns, squareSize, total }
 	callback && callback(layoutVals)

@@ -73,8 +73,9 @@ class Application extends App {
 							box-sizing: border-box;
 							color: var(--color-text);
 							font-family: 'Montserrat', sans-serif;
-							font-size: 12px;
+							font-size: 11px;
 							height: 100vh;
+							letter-spacing: 1px;
 							margin: 0;
 							padding: 0;
 							width: 100vw;
