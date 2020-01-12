@@ -1,22 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import { useRouter } from 'next/router'
 import PORTFOLIO_QUERY from 'lib/queries/portfolio.query';
-import Player from 'components/Player'
 import PortfolioModuleMobile from './PortfolioModuleMobile'
 import PageHead from 'layout/PageHead'
 
 const PortfolioMobile = ({ onLoaded, width }) => {
-	const [vidOpen, setVidOpen] = useState(false)
-	const [vidSrc, setVidSrc] = useState(null)
+	const router = useRouter()
 
 	const { data } = useQuery(PORTFOLIO_QUERY());
 
 	const handleBlockClick = item => {
-		setVidOpen(true)
-		setVidSrc(item.url)
+		router.push(`/portfolio/${item.slug}`, `/portfolio/${item.slug}`, { shallow: true })
 	}
-
-	const handleVidClick = () => setVidOpen(false)
 
 	useEffect(() => { data && onLoaded() }, [])
 
@@ -25,13 +21,6 @@ const PortfolioMobile = ({ onLoaded, width }) => {
 			{data && (
 				<>
 					<PageHead metadata={data.pageMetadata} />
-					{vidOpen && (
-						<Player
-							horizontal
-							onClick={handleVidClick}
-							src={vidSrc}
-						/>
-					)}
 					<div className="container">
 						{data.portfolioModules.map((item, i) => (
 							<PortfolioModuleMobile item={item} key={`module-${i}`} onClick={handleBlockClick} width={width} />
@@ -39,7 +28,7 @@ const PortfolioMobile = ({ onLoaded, width }) => {
 						<style jsx>{`
 							.container {
 								align-items: center;
-								display: ${vidOpen ? 'none' : 'flex'};
+								display: flex;
 								flex-direction: column;
 								justify-content: center;
 							}
