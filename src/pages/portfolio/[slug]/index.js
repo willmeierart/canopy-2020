@@ -17,9 +17,11 @@ const PortfolioItem = () => {
 		(!data?.portfolioModule?.url || error) && router.push('/portfolio', '/portfolio', { shallow: true })
 	}, [])
 
-	useEffect(() => { setIsMobile(width < 500) }, [width < 500])
+	useEffect(() => {
+		setIsMobile(width < 500 || typeof window.orientation !== 'undefined')
+	}, [width < 500])
 
-	const handleVidClick = () => router.push('/portfolio', '/portfolio', { shallow: true })
+	const handleVidClick = () => !isMobile && router.push('/portfolio', '/portfolio', { shallow: true })
 
 	return error ? null : (
 		<div className="container">
