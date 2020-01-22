@@ -21,7 +21,9 @@ const PortfolioItem = () => {
 		setIsMobile(width < 500 || typeof window.orientation !== 'undefined')
 	}, [width < 500])
 
-	const handleVidClick = () => !isMobile && router.push('/portfolio', '/portfolio', { shallow: true })
+	const handleVidClick = () => {
+		!isMobile && router.push('/portfolio', '/portfolio', { shallow: true })
+	}
 
 	return error ? null : (
 		<div className="container">

@@ -37,7 +37,7 @@ class Application extends App {
 						<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
 						<link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
 						<link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
-						<link rel="manifest" href="/site.webmanifest" />
+						<link rel="manifest" href="/static/site.webmanifest" />
 					</Head>
 					<PageTransition
 						skipInititalTransition

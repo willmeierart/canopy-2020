@@ -25,12 +25,15 @@ const Player = ({ homepage, muted = false, onClick, src }) => {
 		} else {
 			setIsMuted(!isMuted)
 		}
+
+		const isMobile = typeof window.orientation !== 'undefined'
+		isMobile && videoRef.current?.play()
 	}
 
 	const maxImgSize = Math.min(width, height) / 20
 
 	return (
-		<div className="container">
+		<div className="container" onClick={handleClick}>
 			{(isMuted || isPaused) && (
 				<div className="overlay" onClick={handleClick}>
 					<img alt="mute-btn" src={isPaused ? '/static/images/play.png' : '/static/images/mute.png'} />
