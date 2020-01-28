@@ -21,14 +21,10 @@ const PortfolioItem = () => {
 		setIsMobile(width < 500 || typeof window.orientation !== 'undefined')
 	}, [width < 500])
 
-	const handleVidClick = () => {
-		!isMobile && router.push('/portfolio', '/portfolio', { shallow: true })
-	}
-
 	return error ? null : (
 		<div className="container">
 			<PageHead metadata={data?.portfolioModule} />
-			{data?.portfolioModule?.url && <Player fullscreen={isMobile} src={data.portfolioModule.url} onClick={handleVidClick} />}
+			{data?.portfolioModule?.url && <Player fullscreen={isMobile} src={data.portfolioModule.url} />}
 			<style jsx>{`
 				.container {
 					height: fit-content;
