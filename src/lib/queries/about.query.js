@@ -10,9 +10,11 @@ const ABOUT_QUERY = gql`
 			}
 		}
 		aboutModules(orderBy: order_ASC) {
-			order
-			text
+			image {
+				url
+			}
 			link
+			text
 		}
 	}
 `

@@ -13,7 +13,7 @@ const AboutModule = ({ idx, layout, data }) => {
 				return 'var(--color-grey-lighter)'
 		}
 	}
-	const background = bgColor()
+	const background = data[idx]?.image?.url ? `url(${data[idx].image.url})` : bgColor()
 
 	const Default = () => (
 		<div className="block">
@@ -21,6 +21,8 @@ const AboutModule = ({ idx, layout, data }) => {
 			<style jsx>{`
 				.block {
 					background: ${background};
+					background-repeat: no-repeat;
+					background-size: cover;
 					box-sizing: border-box;
 					color: ${background === 'var(color-grey-lighter)' ? 'var(color-grey-dark)' : '#fff'};
 					cursor: ${data[idx]?.link ? 'pointer' : 'default'};
