@@ -1,7 +1,6 @@
 const PortfolioModuleDesktop = ({ idx, layout, data, onClick }) => {
-	const handleClick = (blockData) => {
-		onClick && onClick(blockData)
-	}
+
+	const handleClick = (blockData) => onClick && onClick(blockData)
 
 	const item = data[idx]
 

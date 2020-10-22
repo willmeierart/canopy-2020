@@ -6,9 +6,10 @@ import { configureLayout } from 'lib/helpers'
 import Grid from 'components/Grid'
 import PaginationControls from 'components/PaginationControls'
 import PortfolioModuleDesktop from './PortfolioModuleDesktop'
+import PortfolioSubNav from './PortfolioSubNav'
 import PageHead from 'layout/PageHead'
 
-const PortfolioDesktop = ({ onLoaded }) => {
+const PortfolioDesktop = ({ activeType, onLoaded, setActiveType }) => {
 	const router = useRouter()
 
 	const [itemCount, setItemCount] = useState(1)
@@ -18,7 +19,7 @@ const PortfolioDesktop = ({ onLoaded }) => {
 	const [totalModulesPerPage, setTotalModulesPerPage] = useState(1)
 	const [queryBatch, setQueryBatch] = useState([0, 10])
 
-	const { data } = useQuery(PORTFOLIO_QUERY({ first: queryBatch[1], skip: queryBatch[0] }));
+	const { data } = useQuery(PORTFOLIO_QUERY({ first: queryBatch[1], skip: queryBatch[0], type: activeType }));
 
 	const handleBlockClick = blockData => {
 		router.push(`/portfolio/${blockData?.slug}`, `/portfolio/${blockData?.slug}`, { shallow: true })
@@ -59,6 +60,7 @@ const PortfolioDesktop = ({ onLoaded }) => {
 			{data && itemCount && (
 				<div className="container">
 					<PageHead metadata={data.pageMetadata} />
+					<PortfolioSubNav activeType={activeType} setActiveType={setActiveType} />
 					<Grid
 						BlockElement={PortfolioModuleDesktop}
 						configureLayout={configureLayout}

@@ -69,6 +69,7 @@ class Application extends App {
 							--color-text: var(--color-grey-darkest);
 							--color-text-hover: #ffffff;
 							--color-background-hover: var(--color-grey-darkest);
+							--color-background-hover-active: var(--color-grey);
 							background: var(--color-background);
 							box-sizing: border-box;
 							color: var(--color-text);

@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { routes } from 'lib/routes'
 
 const Header = () => {
 	const { ABOUT, HOME, PORTFOLIO } = routes
+	const router = useRouter()
 
 	return (
 		<header>
@@ -10,7 +12,11 @@ const Header = () => {
 				<img alt="logo" src="/static/images/logo.png" />
 			</Link>
 			<div>
-				{[PORTFOLIO, ABOUT].map((route, i) => <Link key={`link-${i}`} href={route.path}><span>{route.title}</span></Link>)}
+				{[PORTFOLIO, ABOUT].map((route, i) => (
+					<Link key={`link-${i}`} href={route.path}>
+						<span className={route.path === router.route ? 'active' : ''}>{route.title}</span>
+					</Link>
+				))}
 			</div>
 			<style jsx>{`
 				header {
@@ -37,6 +43,13 @@ const Header = () => {
 					background-color: var(--color-background-hover);
 					color: var(--color-text-hover);
 					transition: background-color .5s, color .5s;
+				}
+				span.active {
+					background-color: var(--color-background-hover);
+					color: var(--color-text-hover);
+				}
+				span.active:hover {
+					background-color: var(--color-background-hover-active);
 				}
 			`}</style>
 		</header>
