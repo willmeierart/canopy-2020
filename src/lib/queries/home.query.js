@@ -9,7 +9,7 @@ const HOME_QUERY = gql`
 				url
 			}
 		}
-		homepageSliders {
+		homepageSliders(orderBy: order_ASC) {
 			url
 		}
 	}

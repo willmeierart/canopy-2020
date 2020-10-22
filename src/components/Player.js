@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { useWindowSize } from 'lib/hooks'
 
-const Player = ({ homepage, muted = false, onClick, src }) => {
+const Player = ({
+	onVideoEnd,
+	homepage,
+	muted = false,
+	onClick,
+	src,
+}) => {
 	const videoRef = useRef(null)
+	const [inited, setInited] = useState(false)
 	const [isMuted, setIsMuted] = useState(muted)
 	const [isPaused, setIsPaused] = useState(false)
 	const [vidHeight, setVidHeight] = useState(0)
@@ -10,13 +17,21 @@ const Player = ({ homepage, muted = false, onClick, src }) => {
 
 	useEffect(() => {
 		setVidHeight(videoRef.current?.getBoundingClientRect().height || 0)
-	}, [videoRef.current, height, width, isMuted])
+	}, [videoRef.current, videoRef.current?.networkState, height, width, isMuted, inited, src])
 
 	useEffect(() => {
 		videoRef.current.onplay = () => setIsPaused(false)
 		const isMobile = typeof window.orientation !== 'undefined'
 		isMobile && setIsPaused(videoRef.current?.paused)
 	}, [videoRef.current?.paused, videoRef.current?.muted])
+
+	useEffect(() => {
+		if (videoRef.current) {
+			videoRef.current.onended = onVideoEnd ? () => { onVideoEnd(); setInited(false) } : () => {}
+			videoRef.current.oncanplay = setTimeout(() => { setInited(true) }, 400) // hack to fix getBoundingClientRect returning wrong height
+		}
+
+	}, [videoRef.current])
 
 	const handleClick = () => {
 		if (onClick) {
@@ -42,7 +57,7 @@ const Player = ({ homepage, muted = false, onClick, src }) => {
 			<video
 				autoPlay
 				controls={!homepage}
-				loop
+				loop={!onVideoEnd}
 				muted={isMuted}
 				onClick={handleClick}
 				preload="auto"
@@ -51,6 +66,7 @@ const Player = ({ homepage, muted = false, onClick, src }) => {
 			/>
 			<style jsx>{`
 				.container {
+					height: ${vidHeight}px;
 					position: relative;
 				}
 
@@ -71,7 +87,6 @@ const Player = ({ homepage, muted = false, onClick, src }) => {
 				}
 
 				video {
-					max-height: calc(100vh - 120px);
 					position: absolute;
 					width: 100vw;
 					z-index: 500;

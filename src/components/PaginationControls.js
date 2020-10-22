@@ -1,4 +1,10 @@
-const PaginationControls = ({ onPageChange, page, perPage, total }) => {
+const PaginationControls = ({
+	keyMod,
+	onPageChange,
+	page,
+	perPage = 1,
+	total
+}) => {
 	const totalMarkers = Math.ceil(total / perPage)
 	return (
 		<div className="container">
@@ -8,7 +14,7 @@ const PaginationControls = ({ onPageChange, page, perPage, total }) => {
 				return (
 					<div
 						className={`marker ${isActive && 'active'}`}
-						key={`marker-${i}`}
+						key={`${keyMod}-marker-${i}`}
 						onClick={() => { !isActive && onPageChange(pageNumber)}}
 					/>
 				)
