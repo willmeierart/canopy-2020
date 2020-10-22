@@ -4,7 +4,7 @@ import withApollo from 'next-with-apollo'
 import { createHttpLink } from 'apollo-link-http'
 import fetch from 'isomorphic-unfetch'
 
-const GRAPHQL_ENDPOINT = 'https://api-uswest.graphcms.com/v1/ck2ussn5u0p1w01fd8x2j69w3/master'
+const GRAPHQL_ENDPOINT = 'https://api-us-west-2.graphcms.com/v2/ck2ussn5u0p1w01fd8x2j69w3/master'
 
 const link = createHttpLink({
 	fetch,
