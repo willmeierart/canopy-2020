@@ -57,6 +57,7 @@ const Player = ({
 			<video
 				autoPlay
 				controls={!homepage}
+				key={src}
 				loop={!onVideoEnd}
 				muted={isMuted}
 				onClick={handleClick}
@@ -87,6 +88,7 @@ const Player = ({
 				}
 
 				video {
+					max-height: calc(100vh - 120px);
 					position: absolute;
 					width: 100vw;
 					z-index: 500;
