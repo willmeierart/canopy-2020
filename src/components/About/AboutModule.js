@@ -1,9 +1,6 @@
-import { useState } from 'react'
 import { routes } from 'lib/routes'
 
 const AboutModule = ({ idx, layout, data }) => {
-	const [isHovered, setIsHovered] = useState(false)
-
 	const bgColor = () => {
 		switch (true) {
 			case idx < layout.columns:
@@ -19,49 +16,32 @@ const AboutModule = ({ idx, layout, data }) => {
 
 	const hasImage = data[idx]?.image?.url
 	const background = hasImage ? `url(${data[idx].image.url})` : bgColor()
+	const txtColor = background === 'var(color-grey-lighter)' ? 'var(color-grey-dark)' : '#fff'
 
 	const Default = () => (
-		<div className="block" onMouseEnter={() => { hasImage && setIsHovered(true) }} onMouseLeave={() => { hasImage && setIsHovered(false) }}>
-			<span>{data[idx]?.text || ''}</span>
-			{hasImage && <img className={isHovered ? 'hovered' : ''} src={data[idx].image.url} />}
+		<div className="block">
+			{data[idx]?.text || ''}
+			{hasImage && <div className="img" />}
 			<style jsx>{`
 				.block {
-					background: ${bgColor()};
+					background: ${background};
+					background-repeat: no-repeat;
+					background-size: cover;
 					box-sizing: border-box;
-					color: ${background === 'var(color-grey-lighter)' ? 'var(color-grey-dark)' : '#fff'};
+					color: ${hasImage ? 'rgba(255, 255, 255, 0)' : txtColor};
 					cursor: ${data[idx]?.link ? 'pointer' : 'default'};
 					height: ${layout.squareSize}px;
 					line-height: .9rem;
 					overflow: hidden;
 					padding: .5rem;
-					position: relative;
 					white-space: pre-wrap;
 					width: ${layout.squareSize}px;
 				}
 
-				span {
-					z-index: 100;
-				}
-
-				img {
-					height: 100%;
-					left: 0;
-					opacity: 0;
-					position: absolute;
-					top: 0;
-					transition: opacity .5s;
-					width: 100%;
-					z-index: -1;
-				}
-				
-				.hovered {
-					opacity: 1;
-					transition: opacity .5s;
-				}
-
 				.block:hover {
-					filter: brightness(${hasImage ? '100%' : '65%'});
-					transition: filter .5s;
+					color: ${txtColor};
+					filter: brightness(65%);
+					transition: filter .5s, color .5s;
 				}
 			`}</style>
 		</div>
