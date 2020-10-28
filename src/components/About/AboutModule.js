@@ -40,7 +40,7 @@ const AboutModule = ({ idx, layout, data }) => {
 
 				.block:hover {
 					color: ${txtColor};
-					filter: brightness(65%);
+					filter: brightness(${hasImage ? '100%' : '65%'});
 					transition: filter .5s, color .5s;
 				}
 			`}</style>

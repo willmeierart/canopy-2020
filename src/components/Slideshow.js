@@ -38,12 +38,12 @@ const Slideshow = ({
 				src={srcList[activeIdx].url}
 				{...extra}
 			/>
-			{/* {!!transitionState && <SlideComponent className="animated" src={srcList[activeIdx + transitionState].url} {...extra} />} */}
 			{srcList.length > 1 && (
 				<PaginationControls
 					keyMod="slider"
 					onPageChange={handleSlideChange}
 					page={activeIdx + 1}
+					style={{ marginTop: '10px' }}
 					total={srcList.length}
 				/>
 			)}

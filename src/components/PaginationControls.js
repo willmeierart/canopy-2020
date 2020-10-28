@@ -3,11 +3,12 @@ const PaginationControls = ({
 	onPageChange,
 	page,
 	perPage = 1,
-	total
+	total,
+	...extra
 }) => {
 	const totalMarkers = Math.ceil(total / perPage)
 	return (
-		<div className="container">
+		<div className="container" {...extra}>
 			{Array.from('a'.repeat(totalMarkers)).map((a, i) => {
 				const pageNumber = i + 1
 				const isActive = page === pageNumber
