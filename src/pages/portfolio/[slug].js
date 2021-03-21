@@ -13,8 +13,6 @@ const PortfolioItem = () => {
 
 	const { data, error } = useQuery(PORTFOLIO_ITEM_QUERY({ slug: router.query.slug || '' }));
 
-	console.log(data, error, router.query.slug)
-
 	useEffect(() => {
 		error && router.push('/portfolio', '/portfolio', { shallow: true })
 	}, [])
