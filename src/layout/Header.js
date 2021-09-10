@@ -12,7 +12,8 @@ const Header = () => {
 				<img alt="logo" src="/static/images/logo.png" />
 			</Link>
 			<div>
-				{[PORTFOLIO, ABOUT].map((route, i) => (
+				{[ABOUT].map((route, i) => (
+				// {[PORTFOLIO, ABOUT].map((route, i) => (
 					<Link key={`link-${i}`} href={route.path}>
 						<span className={route.path === router.route ? 'active' : ''}>{route.title}</span>
 					</Link>
